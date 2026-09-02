@@ -1,5 +1,9 @@
 # UNITY Kitty Jump
 
+# VIDEO DEMONSTRATION
+
+https://github.com/user-attachments/assets/a38b21d7-01f3-41c8-9d58-c17c663c7af9
+
 ## Description
 
 A simple game which I made for my portfolio
@@ -22,7 +26,3 @@ A/D - Left/Right
 # IN-GAME SCREENSHOT
 
 <img width="471" height="792" alt="Знімок екрана 2025-09-06 115649" src="https://github.com/user-attachments/assets/5f67d12e-26be-4d03-903e-8243349f7836" />
-
-# VIDEO DEMONSTRATION
-
-https://github.com/user-attachments/assets/a38b21d7-01f3-41c8-9d58-c17c663c7af9
