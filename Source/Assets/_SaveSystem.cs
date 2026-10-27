@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class _SaveSystem : MonoBehaviour
 {
+    // Variable that contains the path to json file with save data
     public const string SAVE_FILE_NAME = "/PLAYERDATA.json";
+
+    // Function that saves player data to folder where usually all Unity games
+    // save their data
     public static void SaveGameData()
     {
         string saveFilePath = Application.persistentDataPath + SAVE_FILE_NAME;
@@ -14,6 +18,7 @@ public class _SaveSystem : MonoBehaviour
         File.WriteAllText(saveFilePath, txt);
     }
 
+    // Function that loads the game data in case it exists
     public static SaveInfo LoadGameData()
     {
         try {
