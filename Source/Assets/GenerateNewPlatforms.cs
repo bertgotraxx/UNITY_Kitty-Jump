@@ -13,12 +13,18 @@ public class GenerateNewPlatforms : MonoBehaviour
     public Camera gameCamera;
     private Vector2 screenBounds;
     private float heightLevel;
-    //private bool onCooldown = false;
     
     void Start()
     {
+        // Variable that contains device's screen dimensions in order to prevent
+        // platforms from spawning outside of game's screen
         screenBounds = gameCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, gameCamera.transform.position.z));
+
+        // Variable that contains current player's Y coordinate and adds 4 to it
+        // in order to spawn new platforms that will be slightly higher
         heightLevel = Player.transform.position.y + 4f;
+
+        // "Randomizers" that spawn 2 random platforms abit ahead of player on game start
         for (int i = 0; i < 2; i++)
         {
             Vector2 randomVector = new Vector2(
@@ -33,7 +39,6 @@ public class GenerateNewPlatforms : MonoBehaviour
             Vector2 randomVector = new Vector2(
                 UnityEngine.Random.Range(screenBounds.x * -1, screenBounds.x),
                 UnityEngine.Random.Range((screenBounds.y + 0.8f) + (i * math.PI), (screenBounds.y + 1.8f) + (i * math.PI)));
-            //Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
             GameObject basicPlatform = Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
             basicPlatform.GetComponent<selfDestroy>().enabled = true;
         }
@@ -42,32 +47,43 @@ public class GenerateNewPlatforms : MonoBehaviour
 
     void Update()
     {
+        // Do nothing in case if player is dead or don't exist
         if (Player == null)
         {
             return;
         }
         else
         {
+            // Variable that contains screen bounds. Here it gets new value each update in order to get new Game Camera's Z coordinate
             screenBounds = gameCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, gameCamera.transform.position.z));
-            //Debug.Log(screenBounds);
+
+            // If Player's Y coordinate is bigger than value in "heightLevel" variable then
+            // choose a random number that will determine platform's type (Regular, Unstable, Spiky, Moving, Boost)
             if (Player.transform.position.y > heightLevel)
             {
-                //Debug.Log("NEW PLATFORM CREATED");
                 heightLevel = Player.transform.position.y + 5f;
                 int randomChoice = UnityEngine.Random.Range(1, 20);
                 for (float i = 0; i < 4; i++)
                 {
+                    // Randomly choose new X and Y coordinates for new platform
                     Vector2 randomVector = new Vector2(
                     UnityEngine.Random.Range(screenBounds.x * -1, screenBounds.x),
                     UnityEngine.Random.Range((screenBounds.y + 1f) + (i * math.PI), (screenBounds.y + 2.5f) + (i * math.PI)));
-                    //Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
+
+                    // Switch construction that determines the type of platform basing on
+                    // platform's number and value in "randomChoice"
                     switch (i)
                     {
+                        // Platform no. 0 - it's always a basic platform
                         case 0:
                             GameObject basicPlatform = Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
                             basicPlatform.GetComponent<selfDestroy>().enabled = true;
                             break;
+
+                        // Platform no. 1 - randomly chosen between unstable, spiky, moving and boost platforms
                         case 1:
+
+                            // If
                             if (randomChoice >= 5 && randomChoice <= 8)
                             {
                                 GameObject unstablePlatform = Instantiate(unstablePlatformPrefab, randomVector, transform.rotation);
