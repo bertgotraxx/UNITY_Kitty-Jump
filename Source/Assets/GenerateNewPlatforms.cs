@@ -74,47 +74,52 @@ public class GenerateNewPlatforms : MonoBehaviour
                     // platform's number and value in "randomChoice"
                     switch (i)
                     {
-                        // Platform no. 0 - it's always a basic platform
+                        // Platform no. 1 - it's always a basic platform
                         case 0:
                             GameObject basicPlatform = Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
                             basicPlatform.GetComponent<selfDestroy>().enabled = true;
                             break;
 
-                        // Platform no. 1 - randomly chosen between unstable, spiky, moving and boost platforms
+                        // Platform no. 2 - randomly chosen between basic, unstable, spiky, moving and boost platforms
                         case 1:
-
-                            // If
+                            // If "randomChoice" equals between 5 and 8 then spawn unstable platform
                             if (randomChoice >= 5 && randomChoice <= 8)
                             {
                                 GameObject unstablePlatform = Instantiate(unstablePlatformPrefab, randomVector, transform.rotation);
                                 unstablePlatform.GetComponent<selfDestroy>().enabled = true;
-                            } 
+                            }
+                            // If "randomChoice" equals between 9 and 12 then spawn spiky platform
                             else if (randomChoice >= 9 && randomChoice <= 12)
                             {
                                 GameObject spikyPlatform = Instantiate(spikyPlatformPrefab, randomVector, transform.rotation);
                                 spikyPlatform.GetComponent<selfDestroy>().enabled = true;
                             }
+                            // If "randomChoice" equals between 13 and 15 then spawn moving platform
                             else if (randomChoice >= 13 && randomChoice <= 15)
                             {
                                 GameObject movingPlatform = Instantiate(movingPlatformPrefab, new Vector3(0, randomVector.y, 0), transform.rotation);
                                 movingPlatform.GetComponent<selfDestroy>().enabled = true;
                                 movingPlatform.GetComponent<movingPlatformScript>().enabled = true;
                             }
+                            // If "randomChoice" equals between 18 and 20 then spawn boost platform
                             else if (randomChoice >= 18 && randomChoice <= 20)
                             {
                                 GameObject boostPlatform = Instantiate(boostPlatformPrefab, randomVector, transform.rotation);
                                 boostPlatform.GetComponent<selfDestroy>().enabled = true;
                             }
+                            // Else spawn basic platform
                             else
                             {
                                 basicPlatform = Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
                                 basicPlatform.GetComponent<selfDestroy>().enabled = true;
                             }
                             break;
+                        // Platform no. 3 - it's always a basic platform
                         case 2:
                             GameObject basicPlatform_1 = Instantiate(basicPlatformPrefab, randomVector, transform.rotation);
                             basicPlatform_1.GetComponent<selfDestroy>().enabled = true;
                             break;
+                        // Platform no. 4 - randomly chosen between basic and unstable platform
                         case 3:
                             if (randomChoice >= 5 && randomChoice <= 8)
                             {
