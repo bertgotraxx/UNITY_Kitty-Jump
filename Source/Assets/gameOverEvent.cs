@@ -6,21 +6,15 @@ public class gameOverEvent : MonoBehaviour
 {
     public Canvas GameOverScreen;
 
+    // On game restart - hide game over screen and set time scale back to default
     private void Start()
     {
         showGameOverScreen(false);
         Time.timeScale = 1f;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            Destroy(collision.gameObject);
-            showGameOverScreen(true);
-        }
-    }
-
+    // Function that shows or hides game over screen. In case the value is true
+    // then save player data
     public void showGameOverScreen(bool value)
     {
         GameOverScreen.enabled = value;
@@ -28,7 +22,6 @@ public class gameOverEvent : MonoBehaviour
         switch (value)
         {
             case true:
-                //saveSystem.SaveHighScoreInfo(Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text));
                 if (Int32.Parse(GameObject.Find("Score").GetComponent<Text>().text) 
                     > Int32.Parse(GameObject.Find("HighScore").GetComponent<Text>().text))
                 {
